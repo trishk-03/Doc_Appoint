@@ -13,8 +13,14 @@ class CategoryChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final w = MediaQuery.of(context).size.width;
-    final h = MediaQuery.of(context).size.height;
+    final w = MediaQuery
+        .of(context)
+        .size
+        .width;
+    final h = MediaQuery
+        .of(context)
+        .size
+        .height;
 
     return Container(
       margin: EdgeInsets.only(right: w * 0.03),
@@ -38,10 +44,6 @@ class CategoryChip extends StatelessWidget {
   }
 }
 
-
-// DOCTOR CARD WIDGET
-
-
 class DoctorCard extends StatelessWidget {
   final String category;
   final String name;
@@ -49,7 +51,7 @@ class DoctorCard extends StatelessWidget {
   final String rating;
   final int slots;
   final String date;
-  final String image;
+  final String image; // <-- URL now
 
   const DoctorCard({
     super.key,
@@ -59,7 +61,7 @@ class DoctorCard extends StatelessWidget {
     required this.rating,
     required this.slots,
     required this.date,
-    required this.image,
+    required this.image, // <-- URL from Firestore
   });
 
   @override
@@ -117,13 +119,14 @@ class DoctorCard extends StatelessWidget {
           // --- DOCTOR IMAGE + DETAILS ---
           Row(
             children: [
+              // *** UPDATED: NetworkImage ***
               Container(
                 width: w * 0.22,
                 height: w * 0.22,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(w * 0.04),
                   image: DecorationImage(
-                    image: AssetImage(image),
+                    image: NetworkImage(image), // <-- Firestore URL here
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -213,3 +216,4 @@ class DoctorCard extends StatelessWidget {
     );
   }
 }
+
